@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ITicker } from "./ticker.interface";
-import { useGetTickersList } from "./tickers.gateway";
+import { useFetch } from "../../infra/http/useFetch";
 
 const InitialTicker = {
   ticker: '',
@@ -27,8 +27,8 @@ const initialState: TickerState = {
 export const getTickersList = createAsyncThunk(
   "ticker/fetchList",
   async () => {
-    const {tickersList} = useGetTickersList()
-    return tickersList
+    const {data} = useFetch('https://api.polygon.io/v3/reference/tickers')
+    return data || []
   },
 )
 
