@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ITicker } from "./ticker.interface";
 import { useFetch } from "../../infra/http/useFetch";
+import { RootState } from "../../infra/state/redux/store";
 
 const InitialTicker = {
   ticker: '',
@@ -51,5 +52,7 @@ const tickerSlice = createSlice({
 
   }
 })
+
+export const selectTickersList  = (state: RootState) => state.ticker.tickersList
 
 export default tickerSlice.reducer

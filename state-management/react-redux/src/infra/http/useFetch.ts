@@ -11,7 +11,7 @@ export const useFetch = (url: string) => {
           Authorization: `Bearer ${process.env.REACT_APP_POLYGON}`
         }
       }
-      const response = await axios.get(url, config)
+      const response = await axios.get(url, config)      
       setData(response.data)
   }
   fetchTickersList()
