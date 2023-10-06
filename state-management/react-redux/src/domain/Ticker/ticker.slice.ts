@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ITicker } from "./ticker.interface";
-import { useFetch } from "../../infra/http/useFetch";
 import { RootState } from "../../infra/state/redux/store";
+import { fetchTickersList } from "./ticker.gateways";
 
 const InitialTicker = {
   ticker: '',
@@ -16,20 +16,22 @@ const InitialTicker = {
 interface TickerState {
   tickerDetails: ITicker;
   tickersList: ITicker[];
-  status: "idle" | "loading" | "failed"
+  status: "idle" | "loading" | "failed";
+  error: string | undefined;
 }
 
 const initialState: TickerState = {
   tickerDetails: InitialTicker,
   tickersList: [],
-  status: "idle" 
+  status: "idle",
+  error: ''
 }
 
 export const getTickersList = createAsyncThunk(
   "ticker/fetchList",
   async () => {
-    const {data} = useFetch('https://api.polygon.io/v3/reference/tickers')
-    return data || []
+    const payload = await fetchTickersList()
+    return payload
   },
 )
 
@@ -46,8 +48,9 @@ const tickerSlice = createSlice({
       state.status = 'idle',
       state.tickersList = action.payload
     })
-    .addCase(getTickersList.rejected, (state) => {
+    .addCase(getTickersList.rejected, (state, action) => {
       state.status = 'failed'
+      state.error = action.error.status
     })
 
   }
