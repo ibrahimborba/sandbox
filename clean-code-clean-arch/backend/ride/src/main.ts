@@ -1,39 +1,30 @@
 import express from 'express';
+import {isOvernight, isSunday, isValidDate, isValidDistance} from './RideCalculator';
 const app = express();
+
 app.use(express.json());
 
-app.post("/calc", function (req, res) {
-    let result = 0;
-
-    for (const segment of req.body) {
+app.post("/calculate_ride", function (req, res) {
+    let price = 0;
+    for (const segment of req.body.segments) {
         segment.date = new Date(segment.date);
-        
-        if(segment.distance !== null && segment.distance !== undefined && typeof segment.distance === 'number' && segment.distance > 0) {
-            if(segment.date !== null && segment.date !== undefined && segment.date instanceof Date && segment.date.toString() !== "Invalid Date") {
-                if(segment.date.getHours() >= 22 || segment.date.getHours() <= 6) {
-                    if(segment.date.getDay() !== 0) {
-                        result += segment.distance * 3.9;
-                    } else {
-                        result += segment.distance * 5;
-                    }
-                } else {
-                    if(segment.date.getDay() === 0) {
-                        result += segment.distance * 2.9;
-                    } else {
-                        result += segment.distance * 2.1;
-                    }
-                }
-            } else {
-                res.json({ result: -2 });
-                return;    
-            }
-        }  else {
-            res.json({ result: -1 });
-            return;    
+        if(!isValidDistance(segment)) return  res.json({ price: -1 });
+        if(!isValidDate(segment)) return res.json({ price: -2 });
+        if(isOvernight(segment) && !isSunday(segment)) {
+            price += segment.distance * 3.9;
+        }
+        if(isOvernight(segment) && isSunday(segment)) {
+            price += segment.distance * 5;
+        }
+        if(!isOvernight(segment) && isSunday(segment)) {
+            price += segment.distance * 2.9;
+        }
+        if(!isOvernight(segment) && !isSunday(segment)) {
+            price += segment.distance * 2.1;
         }
     }
-    res.json({ result });
-    return;    
+    price = price < 10 ? 10 : price;
+    res.json({ price });  
 });
 
 app.listen(3000);

@@ -8,7 +8,7 @@ test('Deve fazer o calculo de preco de uma corrida durante o dia', async functio
     };
     const response = await axios.post("http://localhost:3000/calculate_ride", input)
     const output = response.data;
-    expect(output.result).toBe(21);
+    expect(output.price).toBe(21);
 });
 
 test('Deve fazer o calculo de preco de uma corrida durante a noite', async function () {
@@ -19,7 +19,7 @@ test('Deve fazer o calculo de preco de uma corrida durante a noite', async funct
     };
     const response = await axios.post("http://localhost:3000/calculate_ride", input)
     const output = response.data;
-    expect(output.result).toBe(39);
+    expect(output.price).toBe(39);
 });
 
 test('Deve fazer o calculo de preco de uma corrida no domingo de dia', async function () {
@@ -30,7 +30,7 @@ test('Deve fazer o calculo de preco de uma corrida no domingo de dia', async fun
     };
     const response = await axios.post("http://localhost:3000/calculate_ride", input)
     const output = response.data;
-    expect(output.result).toBe(29);
+    expect(output.price).toBe(29);
 });
 
 test('Deve fazer o calculo de preco de uma corrida no domingo de noite', async function () {
@@ -41,7 +41,7 @@ test('Deve fazer o calculo de preco de uma corrida no domingo de noite', async f
     };
     const response = await axios.post("http://localhost:3000/calculate_ride", input)
     const output = response.data;
-    expect(output.result).toBe(50);
+    expect(output.price).toBe(50);
 });
 
 test('Deve retornar -1 se a distancia for invalida', async function () {
@@ -52,7 +52,7 @@ test('Deve retornar -1 se a distancia for invalida', async function () {
     };
     const response = await axios.post("http://localhost:3000/calculate_ride", input)
     const output = response.data;
-    expect(output.result).toBe(-1);
+    expect(output.price).toBe(-1);
 });
 
 test('Deve retornar -2 se a data for invalida', async function () {
@@ -63,5 +63,5 @@ test('Deve retornar -2 se a data for invalida', async function () {
     };
     const response = await axios.post("http://localhost:3000/calculate_ride", input)
     const output = response.data;
-    expect(output.result).toBe(-2);
+    expect(output.price).toBe(-2);
 });
