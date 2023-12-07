@@ -36,7 +36,16 @@ test('Deve cadastrar o passageiro', async function () {
     const responseCreatePassenger = await axios.post("http://localhost:3000/passengers", input);
     const outuputCreatePassenger = responseCreatePassenger.data;
     expect(outuputCreatePassenger.passengerId).toBeDefined();
+});
 
+test('Deve obter o passageiro', async function () {
+    const input = {
+        name: "John Doe",
+        email: "john.doe@gmail.com",
+        document: "83432616074"
+    };
+    const responseCreatePassenger = await axios.post("http://localhost:3000/passengers", input);
+    const outuputCreatePassenger = responseCreatePassenger.data;
     const response = await axios.get(`http://localhost:3000/passengers/${outuputCreatePassenger.passengerId}`);
     expect(response.data.name).toBe("John Doe");
     expect(response.data.email).toBe("john.doe@gmail.com");
