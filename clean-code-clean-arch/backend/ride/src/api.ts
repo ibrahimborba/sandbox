@@ -1,6 +1,7 @@
-// @ts-nocheck
 import express from 'express';
 import Ride from './Ride';
+import pgp from 'pg-promise';
+import crypto from 'crypto';
 const app = express();
 
 app.use(express.json());
@@ -13,9 +14,30 @@ app.post("/calculate_ride", function (req, res) {
         }
         const price = ride.calculate();
         res.json({ price });  
-    } catch (error) {
+    } catch (error: any) {
         res.status(422).send(error.message);
     }
+});
+
+app.post("/passengers", async function(req, res) {
+    const connection = pgp()("psotgres://postgres:123456@localhost:5432/app");
+    const passengerId = crypto.randomUUID();
+    await connection.query(
+        "insert into clean_code_clean_arch.passenger (passenger_id, name, email, document) values ($1, $2, $3, $4)",
+        [passengerId, req.body.name, req.body.email, req.body.document]
+    );
+    await connection.$pool.end();
+    res.json({passengerId});
+});
+
+app.get("/passengers/:passengerId", async function(req, res) {
+    const connection = pgp()("psotgres://postgres:123456@localhost:5432/app");
+    const [passengerData] = await connection.query(
+        "select * from clean_code_clean_arch.apssenger where passenger_id = $1",
+        [req.params.passengerId]
+    );
+    await connection.$pool.end();
+    res.json(passengerData);
 });
 
 app.listen(3000);
