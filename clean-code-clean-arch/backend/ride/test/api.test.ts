@@ -33,9 +33,9 @@ test('Deve cadastrar o passageiro', async function () {
         email: "john.doe@gmail.com",
         document: "83432616074"
     };
-    const responseCreatePassenger = await axios.post("http://localhost:3000/passengers", input);
-    const outuputCreatePassenger = responseCreatePassenger.data;
-    expect(outuputCreatePassenger.passengerId).toBeDefined();
+    const response = await axios.post("http://localhost:3000/passengers", input);
+    const output = response.data;
+    expect(output.passengerId).toBeDefined();
 });
 
 test('Não deve cadastrar o passageiro com cpf errado', async function () {
@@ -44,10 +44,10 @@ test('Não deve cadastrar o passageiro com cpf errado', async function () {
         email: "john.doe@gmail.com",
         document: "83432616076"
     };
-    const responseCreatePassenger = await axios.post("http://localhost:3000/passengers", input);
-    expect(responseCreatePassenger.status).toBe(422);
-    const outuputCreatePassenger = responseCreatePassenger.data;
-    expect(outuputCreatePassenger).toBe('Invalid cpf');
+    const response = await axios.post("http://localhost:3000/passengers", input);
+    expect(response.status).toBe(422);
+    const output = response.data;
+    expect(output).toBe('Invalid cpf');
 });
 
 test('Deve obter o passageiro', async function () {
@@ -56,10 +56,51 @@ test('Deve obter o passageiro', async function () {
         email: "john.doe@gmail.com",
         document: "83432616074"
     };
-    const responseCreatePassenger = await axios.post("http://localhost:3000/passengers", input);
-    const outuputCreatePassenger = responseCreatePassenger.data;
-    const response = await axios.get(`http://localhost:3000/passengers/${outuputCreatePassenger.passengerId}`);
-    expect(response.data.name).toBe("John Doe");
-    expect(response.data.email).toBe("john.doe@gmail.com");
-    expect(response.data.document).toBe("83432616074");
+    const responseCreate = await axios.post("http://localhost:3000/passengers", input);
+    const outputCreate = responseCreate.data;
+    const responseGet = await axios.get(`http://localhost:3000/passengers/${outputCreate.passengerId}`);
+    expect(responseGet.data.name).toBe("John Doe");
+    expect(responseGet.data.email).toBe("john.doe@gmail.com");
+    expect(responseGet.data.document).toBe("83432616074");
+});
+
+test('Deve cadastrar o motorista', async function () {
+    const input = {
+        name: "John Doe",
+        email: "john.doe@gmail.com",
+        document: "83432616074",
+        carPlate: "AAA9999"
+    };
+    const response = await axios.post("http://localhost:3000/drivers", input);
+    const output = response.data;
+    expect(output.driverId).toBeDefined();
+});
+
+test('Não deve cadastrar o motorista com cpf errado', async function () {
+    const input = {
+        name: "John Doe",
+        email: "john.doe@gmail.com",
+        document: "83432616076",
+        carPlate: "AAA9999"
+    };
+    const response = await axios.post("http://localhost:3000/drivers", input);
+    expect(response.status).toBe(422);
+    const output = response.data;
+    expect(output).toBe('Invalid cpf');
+});
+
+test('Deve obter o passageiro', async function () {
+    const input = {
+        name: "John Doe",
+        email: "john.doe@gmail.com",
+        document: "83432616074",
+        carPlate: "AAA9999"
+    };
+    const responseCreate = await axios.post("http://localhost:3000/drivers", input);
+    const outputCreate = responseCreate.data;
+    const responseGet = await axios.get(`http://localhost:3000/drivers/${outputCreate.driverId}`);
+    expect(responseGet.data.name).toBe("John Doe");
+    expect(responseGet.data.email).toBe("john.doe@gmail.com");
+    expect(responseGet.data.document).toBe("83432616074");
+    expect(responseGet.data.carPlate).toBe("AAA9999");
 });
