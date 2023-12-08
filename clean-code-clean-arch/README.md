@@ -1,0 +1,1 @@
+This project follows Rodrigo Branas Clean Code and Clean Architecture course.
