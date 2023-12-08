@@ -38,6 +38,18 @@ test('Deve cadastrar o passageiro', async function () {
     expect(outuputCreatePassenger.passengerId).toBeDefined();
 });
 
+test('Não deve cadastrar o passageiro com cpf errado', async function () {
+    const input = {
+        name: "John Doe",
+        email: "john.doe@gmail.com",
+        document: "83432616076"
+    };
+    const responseCreatePassenger = await axios.post("http://localhost:3000/passengers", input);
+    expect(responseCreatePassenger.status).toBe(422);
+    const outuputCreatePassenger = responseCreatePassenger.data;
+    expect(outuputCreatePassenger).toBe('Invalid cpf');
+});
+
 test('Deve obter o passageiro', async function () {
     const input = {
         name: "John Doe",
