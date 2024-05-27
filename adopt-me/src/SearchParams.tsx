@@ -6,6 +6,7 @@ import Results from "./Results";
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 export interface IResponsePet extends IPet {
+  id: number;
   city: string;
   state: string;
 }

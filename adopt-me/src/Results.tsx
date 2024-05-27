@@ -14,8 +14,8 @@ const Results = ({ list }: IProps) => {
       ) : (
         list.map((element) => (
           <Pet
-            key={element.petID}
-            petID={element.petID}
+            key={element.id}
+            petID={element.id}
             name={element.name}
             animal={element.animal}
             breed={element.breed}
