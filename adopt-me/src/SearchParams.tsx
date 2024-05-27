@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import Pet from "./Pet";
 import { IPet } from "./Pet";
+import useBreedList from "./useBreedList";
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 interface IResPet extends IPet {
-	id: number;
+  id: number;
 }
 
 const SearchParams = () => {
@@ -13,7 +14,7 @@ const SearchParams = () => {
   const [animal, setAnimal] = useState("");
   const [breed, setBreed] = useState("");
   const [pets, setPets] = useState<IResPet[]>([]);
-  const breeds: string[] = [];
+  const [breeds] = useBreedList(animal);
 
   useEffect(() => {
     requestPets();
@@ -29,10 +30,12 @@ const SearchParams = () => {
 
   return (
     <div className="search-params">
-      <form onSubmit={e => {
-				e.preventDefault();
-				requestPets();
-			}}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestPets();
+        }}
+      >
         <label htmlFor="location">
           Location
           <input
