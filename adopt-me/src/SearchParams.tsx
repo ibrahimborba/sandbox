@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import Pet from "./Pet";
 import { IPet } from "./Pet";
 import useBreedList from "./useBreedList";
+import Results from "./Results";
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
-interface IResPet extends IPet {
-  id: number;
+export interface IResponsePet extends IPet {
+  city: string;
+  state: string;
 }
 
 const SearchParams = () => {
   const [location, setLocation] = useState("");
   const [animal, setAnimal] = useState("");
   const [breed, setBreed] = useState("");
-  const [pets, setPets] = useState<IResPet[]>([]);
+  const [pets, setPets] = useState<IResponsePet[]>([]);
   const [breeds] = useBreedList(animal);
 
   useEffect(() => {
@@ -75,14 +76,7 @@ const SearchParams = () => {
         </label>
         <button>Submit</button>
       </form>
-      {pets.map((pet) => (
-        <Pet
-          key={pet.id}
-          name={pet.name}
-          animal={pet.animal}
-          breed={pet.breed}
-        />
-      ))}
+      <Results list={pets} />
     </div>
   );
 };
