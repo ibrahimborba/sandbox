@@ -1,10 +1,10 @@
-interface Pet {
+export interface IPet {
   name: string;
   animal: string;
   breed: string;
 }
 
-const Pet = (props: Pet) => {
+const Pet = (props: IPet & React.HTMLAttributes<HTMLDivElement>) => {
   return (
     <div>
       <h2>{props.name}</h2>
