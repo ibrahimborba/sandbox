@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+
+
 export interface IPet {
   petID: number;
   name: string;
@@ -13,7 +16,7 @@ const Pet = (props: IPet & React.HTMLAttributes<HTMLDivElement>) => {
     hero = props.images[0];
   }
   return (
-    <a href={`/details/${props.petID}`} className="pet">
+    <Link to={`/details/${props.petID}`} className="pet">
       <div className="image-container">
         <img src={hero} alt={props.name} />
       </div>
@@ -23,7 +26,7 @@ const Pet = (props: IPet & React.HTMLAttributes<HTMLDivElement>) => {
           {props.animal} - {props.breed} - {props.location}
         </h3>
       </div>
-    </a>
+    </Link>
   );
 };
 

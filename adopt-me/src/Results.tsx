@@ -1,7 +1,6 @@
 import Pet from "./Pet";
 import { IResponsePet } from "./SearchParams";
 
-
 interface IProps {
   list: IResponsePet[];
 }
