@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-
 export interface IPet {
   petID: number;
   name: string;
