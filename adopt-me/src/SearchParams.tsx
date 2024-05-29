@@ -31,8 +31,9 @@ const SearchParams = () => {
   const pets = results?.data?.pets ?? [];
 
   return (
-    <div className="search-params">
+    <section className="mx-auto my-0 w-11/12">
       <form
+        className="mb-10 flex flex-col justify-center rounded-lg bg-gray-200 p-10 shadow-lg"
         onSubmit={(e) => {
           e.preventDefault();
           const formData = new FormData(e.target);
@@ -79,7 +80,7 @@ const SearchParams = () => {
         <button>Submit</button>
       </form>
       <Results list={pets} />
-    </div>
+    </section>
   );
 };
 
