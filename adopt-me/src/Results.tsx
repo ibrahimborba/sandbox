@@ -7,7 +7,7 @@ interface IProps {
 
 const Results = ({ list }: IProps) => {
   return (
-    <div className="search">
+    <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3">
       {!list.length ? (
         <h1>No Pets Found</h1>
       ) : (
