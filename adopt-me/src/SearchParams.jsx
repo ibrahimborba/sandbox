@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { IPet } from "./Pet";
 import useBreedList from "./useBreedList";
 import Results from "./Results";
 import { useQuery } from "@tanstack/react-query";
@@ -7,12 +6,6 @@ import fetchSearch from "./fetchSearch";
 import AdoptPetContext from "./AdoptPetContext";
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
-
-export interface IResponsePet extends IPet {
-  id: number;
-  city: string;
-  state: string;
-}
 
 const SearchParams = () => {
   const [requestParams, setRequestParams] = useState({

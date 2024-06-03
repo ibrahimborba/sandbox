@@ -1,15 +1,6 @@
 import { Link } from "react-router-dom";
 
-export interface IPet {
-  petID: number;
-  name: string;
-  animal: string;
-  breed: string;
-  location: string;
-  images: string[];
-}
-
-const Pet = (props: IPet & React.HTMLAttributes<HTMLDivElement>) => {
+const Pet = (props) => {
   let hero = "http://pets-images.dev-apis.com/pets/none.jpg";
   if (props.images.length) {
     hero = props.images[0];

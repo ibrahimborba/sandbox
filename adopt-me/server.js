@@ -34,5 +34,5 @@ app.use((req, res) => {
     })
 });
 
-console.log(`listening on ht´´://localhost:${PORT}`);
+console.log(`listening on http://localhost:${PORT}`);
 app.listen(PORT);
