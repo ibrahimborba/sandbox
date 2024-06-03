@@ -1,12 +1,22 @@
 import { Link } from "react-router-dom";
+import { Animal } from "./APIResponsesTypes";
 
-const Pet = (props) => {
+interface IProps {
+  id: number;
+  name: string;
+  animal: Animal;
+  breed: string;
+  images: string[];
+  location: string;
+}
+
+const Pet = (props: IProps) => {
   let hero = "http://pets-images.dev-apis.com/pets/none.jpg";
   if (props.images.length) {
     hero = props.images[0];
   }
   return (
-    <Link to={`/details/${props.petID}`} className="relative block">
+    <Link to={`/details/${props.id}`} className="relative block">
       <div className="image-container">
         <img src={hero} alt={props.name} />
       </div>

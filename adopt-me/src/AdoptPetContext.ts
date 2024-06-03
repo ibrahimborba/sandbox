@@ -12,7 +12,7 @@ const AdoptPetContext = createContext<[Pet, (adoptedPet: Pet) => void]>([
     city: "City",
     state: "ST",
   },
-  () => {}
+  () => {},
 ]);
 
 export default AdoptPetContext;
