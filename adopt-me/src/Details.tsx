@@ -4,7 +4,6 @@ import fetchPet from "./fetchPet";
 import ErrorBoundary from "./ErrorBoundary";
 import { lazy, useContext, useState } from "react";
 import AdoptPetContext from "./AdoptPetContext";
-import { PetAPIResponse } from "./APIResponsesTypes";
 
 const Modal = lazy(() => import("./Modal"));
 
@@ -18,7 +17,7 @@ const Details = () => {
   }
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  const results = useQuery<PetAPIResponse>({
+  const results = useQuery({
     queryKey: ["details", id],
     queryFn: fetchPet,
   });
