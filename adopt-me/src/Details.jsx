@@ -8,21 +8,12 @@ import AdoptPetContext from "./AdoptPetContext";
 const Modal = lazy(() => import("./Modal"));
 
 const Details = () => {
-  const { id } = useParams();
-
-  if (!id) {
-    throw new Error(
-      "Why did you not give me an id. I wanted an id, I have no id.",
-    );
-  }
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  const results = useQuery({
-    queryKey: ["details", id],
-    queryFn: fetchPet,
-  });
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setAdoptedPet] = useContext(AdoptPetContext);
+  const { id } = useParams();
+  const results = useQuery({ queryKey: ["details", id], queryFn: fetchPet });
   if (results.isLoading) {
     return (
       <div className="loading-panel">
@@ -30,10 +21,7 @@ const Details = () => {
       </div>
     );
   }
-  const pet = results?.data?.pets[0];
-  if (!pet) {
-    throw new Error("No pet.");
-  }
+  const pet = results.data.pets[0];
 
   return (
     <>
