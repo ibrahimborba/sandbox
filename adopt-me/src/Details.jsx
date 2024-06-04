@@ -1,10 +1,9 @@
 import { lazy, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import fetchPet from "./fetchPet";
 import ErrorBoundary from "./ErrorBoundary";
 import { adopt } from "./adoptedPetSlice";
+import { useGetPetQuery } from "./petApiService";
 
 const Modal = lazy(() => import("./Modal"));
 
@@ -13,15 +12,14 @@ const Details = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const results = useQuery({ queryKey: ["details", id], queryFn: fetchPet });
-  if (results.isLoading) {
+  const { isLoading, data: pet } = useGetPetQuery(id);
+  if (isLoading) {
     return (
       <div className="loading-panel">
         <h2 className="loader">Loading</h2>
       </div>
     );
   }
-  const pet = results.data.pets[0];
 
   return (
     <>

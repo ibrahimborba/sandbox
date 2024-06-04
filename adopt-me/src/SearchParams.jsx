@@ -1,10 +1,9 @@
 import { useState, useTransition } from "react";
 import useBreedList from "./useBreedList";
 import Results from "./Results";
-import { useQuery } from "@tanstack/react-query";
-import fetchSearch from "./fetchSearch";
 import { useDispatch, useSelector } from "react-redux";
 import { all } from "./searchParamsSlice";
+import { useSearchQuery } from "./petApiService";
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
@@ -13,14 +12,11 @@ const SearchParams = () => {
   const [breeds] = useBreedList(animal);
   const [isPending, startTransition] = useTransition();
   const adoptedPet = useSelector((state) => state.adoptedPet.value);
-  const requestParams = useSelector((state) => state.searchParams.value);
+  const searchParams = useSelector((state) => state.searchParams.value);
   const dispatch = useDispatch();
 
-  const results = useQuery({
-    queryKey: ["search", requestParams],
-    queryFn: fetchSearch,
-  });
-  const pets = results?.data?.pets ?? [];
+  let { data: pets } = useSearchQuery(searchParams);
+  pets = pets ?? [];
 
   return (
     <section className="mx-auto my-0 w-11/12">

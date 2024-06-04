@@ -4,10 +4,10 @@ export const searchParamsSlice = createSlice({
   name: "searchParams",
   initialState: {
     value: {
-        location: "",
-        breed: "",
-        animal: "",
-    }
+      location: "",
+      breed: "",
+      animal: "",
+    },
   },
   reducers: {
     all: (state, action) => {
