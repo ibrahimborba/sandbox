@@ -1,13 +1,8 @@
 import Pet from "./Pet";
-import { IResponsePet } from "./SearchParams";
 
-interface IProps {
-  list: IResponsePet[];
-}
-
-const Results = ({ list }: IProps) => {
+const Results = ({ list }) => {
   return (
-    <div className="search">
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {!list.length ? (
         <h1>No Pets Found</h1>
       ) : (
