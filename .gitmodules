@@ -1,0 +1,3 @@
+[submodule "wordman"]
+	path = wordman
+	url = git@github.com:ibrahimborba/wordman.git
