@@ -1,3 +1,6 @@
 [submodule "wordman"]
 	path = wordman
 	url = git@github.com:ibrahimborba/wordman.git
+[submodule "name-badges"]
+	path = name-badges
+	url = git@github.com:ibrahimborba/name-badges.git
