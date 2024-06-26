@@ -4,3 +4,6 @@
 [submodule "name-badges"]
 	path = name-badges
 	url = git@github.com:ibrahimborba/name-badges.git
+[submodule "inspirational-quotes"]
+	path = inspirational-quotes
+	url = git@github.com:ibrahimborba/inspirational-quotes.git
