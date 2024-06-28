@@ -7,3 +7,6 @@
 [submodule "inspirational-quotes"]
 	path = inspirational-quotes
 	url = git@github.com:ibrahimborba/inspirational-quotes.git
+[submodule "accident-counter"]
+	path = accident-counter
+	url = git@github.com:ibrahimborba/accident-counter.git
