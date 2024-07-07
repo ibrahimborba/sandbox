@@ -10,3 +10,6 @@
 [submodule "accident-counter"]
 	path = accident-counter
 	url = git@github.com:ibrahimborba/accident-counter.git
+[submodule "angular-fundamentals-lessons"]
+	path = angular-fundamentals-lessons
+	url = git@github.com:ibrahimborba/angular-fundamentals-lessons.git
