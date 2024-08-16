@@ -13,3 +13,6 @@
 [submodule "angular-fundamentals-lessons"]
 	path = angular-fundamentals-lessons
 	url = git@github.com:ibrahimborba/angular-fundamentals-lessons.git
+[submodule "enterprise-ui-dev"]
+	path = enterprise-ui-dev
+	url = git@github.com:ibrahimborba/enterprise-ui-dev.git
